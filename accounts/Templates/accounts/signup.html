@@ -1,0 +1,15 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <h1>Signup</h1>
+         <form class="site-form" action="/accounts/signup/" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend>
+                    <h2 style="color: orange;">Enter User details here</h2>
+                </legend>
+                {% csrf_token %}
+                {{form.as_p}}
+            <input type="submit" value="Signup">
+            </fieldset>
+         </form>
+{% endblock %}

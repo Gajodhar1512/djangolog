@@ -1,0 +1,45 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="utf-8">
+    <title>Articles</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+ </head>
+ <body>
+    <h1><a href="{% url 'home' %}">Home</a></h1>
+    <nav>
+        {% if user.is_authenticated %}
+            <form class="logout_link" action="{% url 'accounts:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+                <br><br>
+                <li><a href="{% url 'accounts:profile' %}" class="highlight"><b>Profile</b></a></li>
+                <br><br>
+                <li><a href="{% url 'articles:create' %}" class="highlight"> <b> Create an Article here</b></a></li>
+             </form>
+        {% else %}
+            <ul>
+                <p>Already have an Account?</p>
+                <li><a href="{% url 'accounts:login' %}"><b>Login</b></a></li>
+                <br>
+                <p>Create a new Account here</p>
+                <li><a href="{% url 'accounts:signup' %}"><b>Signup</b></a></li>
+            </ul>
+        {% endif %}
+    </nav>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+     <div class="wrapper">
+         {% block content %}
+
+         {% endblock %}
+     </div>
+ </body>
+</html>

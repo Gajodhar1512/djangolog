@@ -1,0 +1,20 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+
+<div class="create_article">
+
+    <br>
+    <form class="site-form" action="{% url 'articles:create' %}" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>
+                <h2 style="color: orange;">Create New Article</h2>
+            </legend>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Create">
+        </fieldset>
+    </form>
+</div>
+
+{% endblock %}
